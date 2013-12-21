@@ -41,6 +41,8 @@ function gamemanager:update(dt)
       dialoguemanager:update(dt)
    end
 
+   displaymanager:update(dt)
+
 end
 
 

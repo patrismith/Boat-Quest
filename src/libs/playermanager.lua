@@ -6,6 +6,8 @@ function playermanager:init(xtile, ytile)
    self.location = {}
    self:teleport(xtile, ytile)
 
+   dbug.show('playermanager loaded')
+
 end
 
 
@@ -16,7 +18,7 @@ function playermanager:teleport(xtile, ytile)
                      y = constants:tiletopx(ytile),
                      dir = 'down' }
 
-   displaymanager:addSprite('player', self.location.x, self.location.y, 'player')
+   displaymanager:addSprite('player', self.location.x, self.location.y, 'player', 'up')
 
 end
 
@@ -80,7 +82,7 @@ function playermanager:update(dt)
             end
          end
 
-         displaymanager:addSprite('player', self.location.x, self.location.y, 'player')
+         displaymanager:addSprite('player', self.location.x, self.location.y, 'player', k)
 
       end
 

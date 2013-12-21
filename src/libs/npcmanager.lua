@@ -30,6 +30,7 @@ function npcmanager.parse(f, t)
             currroom = word
          elseif column == 2 then
             t[currroom][word] = {}
+            t[currroom][word].dir = constants.playerdirindex[math.random(#constants.playerdirindex)]
             currname = word
          elseif column == 3 then
             t[currroom][currname].img = word
@@ -61,6 +62,8 @@ function npcmanager:init()
    self.npcs = {}
    self.parse(constants.npcFile, self.npcs)
 
+   dbug.show('npcmanager loaded')
+
 end
 
 
@@ -72,7 +75,7 @@ function npcmanager:loadNPCs(map)
          v.y = constants:tiletopx(v.ytile)
          v.xtiletarget = v.xtile
          v.ytiletarget = v.ytile
-         v.movetimer = math.random(1,50)
+         v.movetimer = math.random(1,9)
          self:createNPC(k,v)
       end
    end
@@ -82,7 +85,7 @@ end
 
 function npcmanager:createNPC(key,val)
 
-   displaymanager:addSprite(key,val.x,val.y,val.img)
+   displaymanager:addSprite(key,val.x,val.y,val.img,val.dir)
    collisionmanager:addTile({xtile = constants:pxtotile(val.x), ytile = constants:pxtotile(val.y), id = 'npc', name = key})
 
 end
@@ -109,6 +112,7 @@ function npcmanager:move(map, name)
    local dir = constants.playerdirindex[math.random(#constants.playerdirindex)]
    local xtiletemp = self.npcs[map][name].xtile + constants.playerdir[dir].x
    local ytiletemp = self.npcs[map][name].ytile + constants.playerdir[dir].y
+   self.npcs[map][name].dir = dir
 
    collisionmanager:removeNPC(name)
 
@@ -161,11 +165,12 @@ function npcmanager:update(dt)
 
          if v.moves then
 
-            v.movetimer = v.movetimer + 1
+            -- change this to use dt
+            v.movetimer = v.movetimer + dt
 
-            if v.movetimer >= 1000 then
+            if v.movetimer >= 10 then
                self:move(constants.currmap, k)
-               v.movetimer = math.random(1,500)
+               v.movetimer = v.movetimer - 10
             end
 
             self:fluidmove(k, v)

@@ -13,6 +13,10 @@ function displaymanager:init()
    self.sprites = {}
    self.spriteindex = {}
 
+   self.spriteanim = 0
+
+   dbug.show('displaymanager loaded')
+
 end
 
 
@@ -43,7 +47,7 @@ function displaymanager:resetSprites()
 end
 
 
-function displaymanager:addSprite(name, x, y, img)
+function displaymanager:addSprite(name, x, y, img, frame)
 
    -- add a player or npc sprite to a key table
    -- if the sprite already exists (as identified by name),
@@ -53,15 +57,11 @@ function displaymanager:addSprite(name, x, y, img)
       self.sprites[name] = {}
    end
 
-   -- y is altered because we are assuming all sprites are 8x16 px.
-   -- if a different size sprite is needed, one workaround is to alter
-   -- the x/y values before passing to this function.
-   -- i'd like to figure out something better :)
-
    self.sprites[name].x = x
-   self.sprites[name].y = y-constants.tilesize
+   self.sprites[name].y = y
 
    self.sprites[name].img = img
+   self.sprites[name].frame = frame
 
    self:updateSpriteindex()
 
@@ -87,7 +87,7 @@ function displaymanager:updateSpriteindex()
    constants.clearTable(self.spriteindex)
 
    for k,v in pairs(self.sprites) do
-      table.insert(self.spriteindex, {img = v.img, x = v.x, y = v.y})
+      table.insert(self.spriteindex, {img = v.img, frame = v.frame, x = v.x, y = v.y})
    end
 
    -- sort table by y value
@@ -100,7 +100,7 @@ function displaymanager:renderSprites()
 
 
    for i,v in ipairs(self.spriteindex) do
-      love.graphics.drawq(constants.charsheet, constants.sprites[v.img], v.x, v.y)
+      love.graphics.drawq(constants.charsheet.img, constants.sprites[v.img][v.frame].a, v.x, v.y)
    end
 
 end
@@ -133,6 +133,23 @@ function displaymanager:draw()
       love.graphics.draw(self.canvas,0,0,0,scale)
       ---------------------
    end
+
+end
+
+
+function displaymanager:update(dt)
+
+   -- handling optional sprite animations
+   self.spriteanim = self.spriteanim + dt
+   if self.spriteanim >= 1 then
+      self.spriteanim = self.spriteanim - 1
+      for k,v in pairs(constants.sprites) do
+         for k2,v2 in pairs(v) do
+            v2.a, v2.b = v2.b, v2.a
+         end
+      end
+   end
+
 
 end
 

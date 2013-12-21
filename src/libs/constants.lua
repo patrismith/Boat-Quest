@@ -1,6 +1,23 @@
 local constants = {}
 
 
+function constants:populate(x,w,h)
+
+   -- populate a table with quads for walking in all four directions
+
+   local t = {}
+
+   for i,v in ipairs(self.playerdirindex) do
+      t[v] = {}
+      t[v].a = love.graphics.newQuad(x,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
+      t[v].b = love.graphics.newQuad(x+w,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
+   end
+
+   return t
+
+end
+
+
 function constants:init()
 
    self.tilesize = 8
@@ -13,21 +30,24 @@ function constants:init()
                       right = { x = 1,
                                 y = 0 }
                     }
-   self.playerdirindex = {'up','down','left','right'}
-   self.mapFile = 'testload.txt'
+   self.playerdirindex = {'down','right','up','left'}
+   self.mapFile = 'testmap.txt'
    self.npcFile = 'testnpc.txt'
 
    -- where the player starts
    self.startingLoc = {}
-   self.startingLoc.room = 'YourOffice'
+   self.startingLoc.room = 'testroom'
    self.startingLoc.xtile = 20
    self.startingLoc.ytile = 15
 
-   self.charsheet = love.graphics.newImage('assets/sprites.png')
+   self.charsheet = {}
+   self.charsheet.img = love.graphics.newImage('assets/charsheet.png')
+   self.charsheet.w = self.charsheet.img:getWidth()
+   self.charsheet.h = self.charsheet.img:getHeight()
    self.sprites = {}
-   self.sprites.player = love.graphics.newQuad(0,0,8,8*2,8*8,8*2)
-   self.sprites.pigtails = love.graphics.newQuad(8*3,0,8,8*2,8*8,8*2)
-   self.sprites.notsure = love.graphics.newQuad(8*2,0,8,8*2,8*8,8*2)
+   self.sprites.player = self:populate(0,16,16)
+   self.sprites.cruiser = self:populate(32,24,16)
+   self.sprites.tugboat = {}
 
    -- draw functions to pass to displaymanager
    -- simulates different 'gamestates'
