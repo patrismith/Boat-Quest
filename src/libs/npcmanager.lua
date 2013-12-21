@@ -86,7 +86,7 @@ end
 function npcmanager:createNPC(key,val)
 
    displaymanager:addSprite(key,val.x,val.y,val.img,val.dir)
-   collisionmanager:addTile({xtile = constants:pxtotile(val.x), ytile = constants:pxtotile(val.y), id = 'npc', name = key})
+   collisionmanager:addTile({xtile = constants:pxtotile(val.x), ytile = constants:pxtotile(val.y), id = 'npc', name = key, wtile = constants:pxtotile(constants.sprites[val.img][val.dir].w), htile = constants:pxtotile(constants.sprites[val.img][val.dir].h) })
 
 end
 

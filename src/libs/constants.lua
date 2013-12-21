@@ -1,7 +1,7 @@
 local constants = {}
 
 
-function constants:populate(x,w,h)
+function constants:populate(x,w,h,animated)
 
    -- populate a table with quads for walking in all four directions
 
@@ -10,7 +10,11 @@ function constants:populate(x,w,h)
    for i,v in ipairs(self.playerdirindex) do
       t[v] = {}
       t[v].a = love.graphics.newQuad(x,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
-      t[v].b = love.graphics.newQuad(x+w,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
+      if animated then
+         t[v].b = love.graphics.newQuad(x+w,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
+      end
+      t[v].w = w
+      t[v].h = h
    end
 
    return t
@@ -45,8 +49,8 @@ function constants:init()
    self.charsheet.w = self.charsheet.img:getWidth()
    self.charsheet.h = self.charsheet.img:getHeight()
    self.sprites = {}
-   self.sprites.player = self:populate(0,16,16)
-   self.sprites.cruiser = self:populate(32,24,16)
+   self.sprites.player = self:populate(0,16,16,true)
+   self.sprites.cruiser = self:populate(32,24,16,true)
    self.sprites.tugboat = {}
 
    -- draw functions to pass to displaymanager

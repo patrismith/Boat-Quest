@@ -101,6 +101,14 @@ function displaymanager:renderSprites()
 
    for i,v in ipairs(self.spriteindex) do
       love.graphics.drawq(constants.charsheet.img, constants.sprites[v.img][v.frame].a, v.x, v.y)
+      --[[
+      if dbugglobal then
+         love.graphics.setColor(255,0,0)
+         love.graphics.rectangle("line",v.x,v.y,constants.sprites[v.img][v.frame].w,constants.sprites[v.img][v.frame].h)
+         love.graphics.setColor(255,255,255)
+      end
+      --]]
+
    end
 
 end
@@ -145,7 +153,9 @@ function displaymanager:update(dt)
       self.spriteanim = self.spriteanim - 1
       for k,v in pairs(constants.sprites) do
          for k2,v2 in pairs(v) do
-            v2.a, v2.b = v2.b, v2.a
+            if v2.a and v2.b then
+               v2.a, v2.b = v2.b, v2.a
+            end
          end
       end
    end

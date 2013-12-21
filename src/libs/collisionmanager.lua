@@ -26,11 +26,17 @@ function collisionmanager:addTile(params)
    -- optional:
    -- dest: table with keys xtile, ytile, map (string)
    -- name: name of npc, used for looking up dialogue
+   -- w/h: width/height in px of the collision tile
+
 
    local params = params or {}
    local tbl = {}
 
    local toAdd = {xtile = tonumber(params.xtile), ytile = tonumber(params.ytile), id = params.id}
+
+   -- you can specify the width and height of the collision tile
+   toAdd.wtile = params.wtile or 1
+   toAdd.htile = params.htile or 1
 
    if params.dest then
       dbug.show('exit added: ' .. params.dest.map)
@@ -53,12 +59,6 @@ function collisionmanager:NPCfirst(name)
 end
 
 
-function collisionmanager:moveNPC()
-
-
-
-end
-
 function collisionmanager:removeNPC(name)
 
    self:NPCfirst(name)
@@ -67,21 +67,27 @@ function collisionmanager:removeNPC(name)
 end
 
 
-function collisionmanager:detect(x, y, tile)
+function collisionmanager:detect(x, y, w, h)
+
+   local w = w or constants.tilesize
+   local h = h or constants.tilesize
 
    -- detect a square
    local xtile = constants:pxtotile(x)
    local ytile = constants:pxtotile(y)
-   local xtile2 = constants:pxtotile(x+constants.tilesize-1)
-   local ytile2 = constants:pxtotile(y+constants.tilesize-1)
+   local xtile2 = constants:pxtotile(x+w-1)
+   local ytile2 = constants:pxtotile(y+h-1)
 
    for i,v in ipairs(self.tiles) do
-      --dbug.show(i .. " " .. v.xtile .. " " .. type(v.xtile))
-      if ((xtile == v.xtile) or (xtile2 == v.xtile)) and ((ytile == v.ytile) or (ytile2 == v.ytile)) then
-         dbug.show('collision registered at ' .. xtile .. ', ' .. ytile .. ', ' .. v.id)
-         -- if it is an exit tile, v.dest will be set
-         -- if it is an npc, v.name will be set
-         return v.id, v.dest or v.name or nil
+      for i = 1, v.wtile, 1 do
+         for j = 1, v.htile, 1 do
+            if ((xtile == v.xtile) or (xtile2 == v.xtile+i)) and ((ytile == v.ytile) or (ytile2 == v.ytile+j)) then
+               dbug.show('collision registered at ' .. xtile .. ', ' .. ytile .. ', ' .. v.id)
+               -- if it is an exit tile, v.dest will be set
+               -- if it is an npc, v.name will be set
+               return v.id, v.dest or v.name or nil
+            end
+         end
       end
    end
 
@@ -94,11 +100,12 @@ function collisionmanager:render()
 
    --[[
    if dbugglobal then
-      for i,v in ipairs(self.solidTiles) do
-         love.graphics.rectangle("line", self:tiletopx(v.xtile), self:tiletopx(v.ytile), constants.tilesize, constants.tilesize)
+      for i,v in ipairs(self.tiles) do
+         love.graphics.rectangle("line", constants:tiletopx(v.xtile), constants:tiletopx(v.ytile), constants:tiletopx(v.wtile), constants:tiletopx(v.htile))
+         love.graphics.rectangle("line", constants:tiletopx(v.xtile+v.wtile), constants:tiletopx(v.ytile+v.htile), constants:tiletopx(v.wtile), constants:tiletopx(v.htile))
       end
    end
-   ---]]
+   --]]
 
 end
 

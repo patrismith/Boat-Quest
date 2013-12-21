@@ -70,7 +70,7 @@ function playermanager:update(dt)
          local ytemp = self.location.y + v.y
 
          -- check if there's any special tiles in that area
-         local collide, dest = collisionmanager:detect(xtemp, ytemp)
+         local collide, dest = collisionmanager:detect(xtemp, ytemp, constants.sprites.player[self.location.dir].w, constants.sprites.player[self.location.dir].h)
 
          if collide == false or collide == 'exit' then
             -- only move forward if we didn't hit a tile, or hit an exit tile
@@ -102,7 +102,7 @@ function playermanager:keypressed(key)
       local xtemp = self.location.x + constants.playerdir[self.location.dir].x
       local ytemp = self.location.y + constants.playerdir[self.location.dir].y
 
-      local collide, name = collisionmanager:detect(xtemp, ytemp)
+      local collide, name = collisionmanager:detect(xtemp, ytemp, constants.sprites.player[self.location.dir].w, constants.sprites.player[self.location.dir].h)
 
       if collide == 'npc' then
          npcmanager:talk(constants.currmap, name)
