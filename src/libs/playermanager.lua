@@ -104,7 +104,7 @@ function playermanager:keypressed(key)
 
       local collide, name = collisionmanager:detect(xtemp, ytemp, constants.sprites.player[self.location.dir].w, constants.sprites.player[self.location.dir].h)
 
-      if collide == 'npc' then
+      if collide == 'npc' and name then
          npcmanager:talk(constants.currmap, name)
 
          -- this is an example of a handcoded event

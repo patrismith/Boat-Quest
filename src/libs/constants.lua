@@ -1,20 +1,42 @@
 local constants = {}
 
 
-function constants:populate(x,w,h,animated)
+function constants:populate(x,w,h,animated,directioned,horiz,y)
 
    -- populate a table with quads for walking in all four directions
+   -- bools --
+   -- animated: make a 'b' table value for a two-frame character animation
+   -- directioned: quads are laid out in a specific pattern for walking on the charsheet
+   -- horiz: only relevant when directioned is false and animated is true
+   --        frame b is horizontally to the right of frame a on the charsheet
+   -- y is so i don't have to type 0 all the time
 
    local t = {}
+   local y = y or 0
 
-   for i,v in ipairs(self.playerdirindex) do
-      t[v] = {}
-      t[v].a = love.graphics.newQuad(x,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
-      if animated then
-         t[v].b = love.graphics.newQuad(x+w,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
+   if directioned then
+      for i,v in ipairs(self.playerdirindex) do
+         t[v] = {}
+         t[v].a = love.graphics.newQuad(x,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
+         if animated then
+            t[v].b = love.graphics.newQuad(x+w,(i-1)*h,w,h,self.charsheet.w,self.charsheet.h)
+         end
+         t[v].w = w
+         t[v].h = h
       end
-      t[v].w = w
-      t[v].h = h
+   else
+      dbug.show('drawing non directioned')
+      -- i tried not to do it this way, but alas
+      for i,v in ipairs(self.playerdirindex) do
+         t[v] = {}
+         t[v].a = love.graphics.newQuad(x,y,w,h,self.charsheet.w,self.charsheet.h)
+         if animated then
+            t[v].b = love.graphics.newQuad(horiz and x+w or x, horiz and y or y+h,w,h,self.charsheet.w,self.charsheet.h)
+            dbug.show('b frame is type ' .. type(t[v].b))
+         end
+         t[v].w = w
+         t[v].h = h
+      end
    end
 
    return t
@@ -25,6 +47,14 @@ end
 function constants:init()
 
    self.tilesize = 8
+
+   self.w = love.graphics.getWidth()
+   self.h = love.graphics.getHeight()
+   self.wtile = 31
+   self.htile = 30
+   dbug.show(self.wtile)
+   dbug.show(self.htile)
+
    self.playerdir = { up = { x = 0,
                              y = -1 },
                       down = { x = 0,
@@ -49,9 +79,13 @@ function constants:init()
    self.charsheet.w = self.charsheet.img:getWidth()
    self.charsheet.h = self.charsheet.img:getHeight()
    self.sprites = {}
-   self.sprites.player = self:populate(0,16,16,true)
-   self.sprites.cruiser = self:populate(32,24,16,true)
-   self.sprites.tugboat = {}
+   self.sprites.player = self:populate(0,16,16,true,true)
+   self.sprites.cruiser = self:populate(32,24,16,true,true)
+   self.sprites.tugboat = self:populate(80,24,16,true,true)
+   self.sprites.whale = self:populate(128,32,16,true,false,false)
+   self.sprites.mermaid = self:populate(128,8,24,true,false,true,32)
+   self.sprites.seagull = self:populate(128,8,8,true,false,true,56)
+   self.sprites.octopus = self:populate(144,16,16,true,false,false,32)
 
    -- draw functions to pass to displaymanager
    -- simulates different 'gamestates'

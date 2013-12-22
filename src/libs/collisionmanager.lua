@@ -67,7 +67,7 @@ function collisionmanager:removeNPC(name)
 end
 
 
-function collisionmanager:detect(x, y, w, h)
+function collisionmanager:detect(x, y, w, h, npc)
 
    local w = w or constants.tilesize
    local h = h or constants.tilesize
@@ -81,11 +81,16 @@ function collisionmanager:detect(x, y, w, h)
    for i,v in ipairs(self.tiles) do
       for i = 1, v.wtile, 1 do
          for j = 1, v.htile, 1 do
-            if ((xtile == v.xtile) or (xtile2 == v.xtile+i)) and ((ytile == v.ytile) or (ytile2 == v.ytile+j)) then
+            if (((xtile == v.xtile) or (xtile2 == v.xtile+i)) and
+                ((ytile == v.ytile) or (ytile2 == v.ytile+j))) then
                dbug.show('collision registered at ' .. xtile .. ', ' .. ytile .. ', ' .. v.id)
                -- if it is an exit tile, v.dest will be set
                -- if it is an npc, v.name will be set
                return v.id, v.dest or v.name or nil
+            elseif (((xtile <= 0) or (xtile2 >= constants.wtile)) or
+                    ((ytile <= 0) or (ytile2 >= constants.htile))) then
+               dbug.show('offscreen collision registered at ' .. xtile .. ', ' .. ytile)
+               return true
             end
          end
       end
