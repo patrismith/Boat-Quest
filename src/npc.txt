@@ -1,0 +1,28 @@
+# NPC script file!
+#
+# roomname:npcname:imagename:x-position:y-position:moves:fights:heals:dialogue before fight:dialogue after fight
+#
+# dialogue is in this format:
+# Sentences * separated by an asterix
+#
+#
+
+startroom:boat01:tugboat:10:10:true:false:false:I'm sorry Case, but I can't let you go to the boat party until you find your anchor.*You might drift away!*Maybe someone around the harbor knows where it is.*Why don't you go ask around?
+signroom01:mermaid01:mermaid:10:10:true:false:false:Hello, Case! Are you looking for your anchor?*I think the whale might be able to help you.*Don't worry, he's a gentle giant!
+signroom01:sign01:seagull:5:15:false:false:false:Caution! Whale Ahead!
+signroom01:sign02:seagull:20:15:false:false:false:Smooth Sailing. This Way!
+whaleroom:whale:whale:10:10:false:false:false:Hey there, Case!*I found a piece of your anchor at the bottom of the sea!*At least you know it works now! Hyuk, hyuk!*Here you go!:Say hi to the boats at the party for me!
+merroom01:mermaid02:mermaid:10:10:true:false:false:What part of a mermaid weighs the most?*The scales!
+merroom01:mermaid03:mermaid:15:15:true:false:false:How do you talk to a fish?*Drop it a line!
+boatroom:boat02:cruiser:10:10:true:false:false:Port means left!*I can't seem to get this other boat to understand that though!
+boatroom:boat03:tugboat:15:15:true:false:false:Starboard means right!*This boat just will NOT listen though!
+signroom02:sign03:seagull:10:10:false:false:false:This Way to the Wise Old Dolphin!
+signroom02:sign04:seagull:10:10:false:false:false:Questioning Octopus
+octoroom:octopus:octopus:10:10:true:false:false:I will only give you your anchor rope back if you can tell me how many tentacles I have.*Well, how many?:Very good!*For future reference, if you had said "ten", I would have said "WRONG!!"*That's because squid have 10 tentacles. Not me!
+merroom02:mermaid04:mermaid:10:10:true:false:false:Insert joke here!
+merroom02:mermaid05:mermaid:15:15:true:false:false:Another joke!
+anchorroom:mermaid06:mermaid:10:10:true:false:false:Not all mermaids tell jokes. Well, do you want me to help you?:Enjoy the boat party!
+coralreef:boat04:tugboat:10:10:true:false:false:Inside those coral reefs are thousands of holes filled with tiny little invertebrates.*That reef is like a big coral city for them.
+coralreef:boat05:cruiser:15:15:true:false:false:The biggest coral reef in the world is the Great Barrier Reef off the coast of Australia.*I'd sure like to sail over there and see it, but my mom says I might sink and I should wait till I'm older.
+merroom03:mermaid07:mermaid:10:10:true:false:false:I have a really good joke, but there's no one to hear it!*Do you want to hear it?*Well, I forgot...*Sorry, but you should have got here sooner!
+dolphinroom:dolphin:dolphin:10:10:true:false:false:Melissa Mermaid won't help you out, huh?*Well, sometimes you have to know the magic word to get people to help you.*Maybe you should say "please" next time you talk to her?:I love the sea!

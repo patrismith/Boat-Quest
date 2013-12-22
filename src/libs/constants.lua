@@ -65,12 +65,12 @@ function constants:init()
                                 y = 0 }
                     }
    self.playerdirindex = {'down','right','up','left'}
-   self.mapFile = 'testmap.txt'
-   self.npcFile = 'testnpc.txt'
+   self.mapFile = 'map.txt'
+   self.npcFile = 'npc.txt'
 
    -- where the player starts
    self.startingLoc = {}
-   self.startingLoc.room = 'testroom'
+   self.startingLoc.room = 'startroom'
    self.startingLoc.xtile = 20
    self.startingLoc.ytile = 15
 
@@ -86,6 +86,7 @@ function constants:init()
    self.sprites.mermaid = self:populate(128,8,24,true,false,true,32)
    self.sprites.seagull = self:populate(128,8,8,true,false,true,56)
    self.sprites.octopus = self:populate(144,16,16,true,false,false,32)
+   self.sprites.dolphin = self:populate(160,16,16,true,false,false)
 
    -- draw functions to pass to displaymanager
    -- simulates different 'gamestates'

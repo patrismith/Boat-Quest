@@ -1,0 +1,15 @@
+startroom:sailing:startroom.tmx:maze:15:28:15:2:signroom01:15:1:15:26
+signroom01:sailing:signroom01.tmx:startroom:15:28:15:2:whaleroom:1:15:28:15:merroom01:29:15:2:15
+whaleroom:sailing:whaleroom.tmx:signroom01:29:15:2:15
+merroom01:sailing:merroom01.tmx:signroom01:1:15:28:15:boatroom:29:15:2:15
+boatroom:sailing:boatroom.tmx:merroom01:1:15:28:15:island:15:1:15:26
+island:sailing:island.tmx:boatroom:15:28:15:2:signroom02:15:1:15:26
+signroom02:sailing:signroom02.tmx:island:15:28:15:2:octoroom:29:15:2:15:merroom02:1:15:28:15
+octoroom:sailing:octoroom.tmx:signroom02:1:15:28:15
+merroom02:sailing:merroom02.tmx:signroom02:29:15:2:15:anchorroom:15:1:15:26:coralreef:1:15:28:15
+anchorroom:sailing:anchorroom.tmx:merroom02:15:28:15:2
+coralreef:sailing:coralreef.tmx:merroom02:29:15:2:15:merroom03:1:15:28:15
+merroom03:sailing:merroom03.tmx:coralreef:29:15:2:15:dolphinroom:15:1:15:26
+dolphinroom:sailing:dolphinroom.tmx:merroom03:15:28:15:2
+maze:sailing:maze.tmx:startroom:15:1:15:26:party:15:28:15:2
+party:sailing:party.tmx:maze:15:1:15:26

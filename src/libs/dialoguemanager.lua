@@ -62,7 +62,7 @@ end
 function dialoguemanager:render()
 
    self:box(0,21*8,31*8,8*8)
-   love.graphics.printf(self.boxes[self.currbox],11,21*8+11,23*8-23,"left")
+   love.graphics.printf(self.boxes[self.currbox],11,21*8+11,31*8-23,"left")
 
 end
 

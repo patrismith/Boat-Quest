@@ -109,6 +109,8 @@ function playermanager:keypressed(key)
 
          -- this is an example of a handcoded event
          -- I'm still thinking of how to do events
+         -- a separate 'eventmanager' that collects all the hardcoded stuff into one file
+         -- and checks on every update
          if name == 'itemtest' then
             npcmanager:removeNPC(constants.currmap, name)
          end

@@ -13,29 +13,31 @@ function mapmanager.parse(f, t)
       column = 0
       currroom = ""
       currexit = ""
-      for word in string.gmatch(line, '[^:]+') do
-         column = column + 1
-         if column == 1 then
-            t[word] = {}
-            t[word].exit = {}
-            currroom = word
-         elseif column == 2 then
-            t[currroom].music = word
-         elseif column == 3 then
-            t[currroom].map = word
-         --below is the code for creating exits
-         --it will break if the format is not followed!
-         elseif (column + 1) % 5 == 0 then
-            t[currroom].exit[word] = {}
-            currexit = word
-         elseif column % 5 == 0 then
-            t[currroom].exit[currexit].xtile = word
-         elseif (column - 1) % 5 == 0 then
-            t[currroom].exit[currexit].ytile = word
-         elseif (column - 2) % 5 == 0 then
-            t[currroom].exit[currexit].destx = word
-         elseif (column - 3) % 5 == 0 then
-            t[currroom].exit[currexit].desty = word
+      if not (string.sub(line,1,1) == '#') then
+         for word in string.gmatch(line, '[^:]+') do
+            column = column + 1
+            if column == 1 then
+               t[word] = {}
+               t[word].exit = {}
+               currroom = word
+            elseif column == 2 then
+               t[currroom].music = word
+            elseif column == 3 then
+               t[currroom].map = word
+               --below is the code for creating exits
+               --it will break if the format is not followed!
+            elseif (column + 1) % 5 == 0 then
+               t[currroom].exit[word] = {}
+               currexit = word
+            elseif column % 5 == 0 then
+               t[currroom].exit[currexit].xtile = word
+            elseif (column - 1) % 5 == 0 then
+               t[currroom].exit[currexit].ytile = word
+            elseif (column - 2) % 5 == 0 then
+               t[currroom].exit[currexit].destx = word
+            elseif (column - 3) % 5 == 0 then
+               t[currroom].exit[currexit].desty = word
+            end
          end
       end
    end
@@ -56,6 +58,7 @@ end
 
 function mapmanager:loadMap(mapName)
 
+   dbug.show('attempting to load ' .. mapName)
    constants.currmap = mapName
    self.map = ATL.Loader.load(self.rooms[mapName].map)
 
