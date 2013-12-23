@@ -8,6 +8,8 @@ mapmanager = require('libs.mapmanager')
 npcmanager = require('libs.npcmanager')
 displaymanager = require('libs.displaymanager')
 playermanager = require('libs.playermanager')
+events = require('libs.events')
+inventory = require('libs.inventory')
 dbug = require('libs.dbug')
 
 dbugglobal = true

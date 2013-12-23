@@ -70,7 +70,7 @@ function constants:init()
 
    -- where the player starts
    self.startingLoc = {}
-   self.startingLoc.room = 'startroom'
+   self.startingLoc.room = 'octoroom'
    self.startingLoc.xtile = 20
    self.startingLoc.ytile = 15
 
@@ -86,17 +86,22 @@ function constants:init()
    self.sprites.mermaid = self:populate(128,8,24,true,false,true,32)
    self.sprites.seagull = self:populate(128,8,8,true,false,true,56)
    self.sprites.octopus = self:populate(144,16,16,true,false,false,32)
-   self.sprites.dolphin = self:populate(160,16,16,true,false,false)
+   self.sprites.dolphin = self:populate(160,16,16,true,true,false)
+   self.sprites.rightsign = self:populate(192,16,16,true,false,true)
+   self.sprites.leftsign = self:populate(192,16,16,true,false,true,16)
+   self.sprites.buoy = self:populate(192,8,16,true,false,true,32)
 
    -- draw functions to pass to displaymanager
    -- simulates different 'gamestates'
    self.status = {}
    self.status.normal = {mapmanager.draw,
                          displaymanager.drawSprites,
+                         inventory.draw,
                          playermanager.draw,
                          collisionmanager.draw}
    self.status.dialogue = {mapmanager.draw,
                            displaymanager.drawSprites,
+                           inventory.draw,
                            dialoguemanager.draw}
 
    dbug.show('constants loaded')

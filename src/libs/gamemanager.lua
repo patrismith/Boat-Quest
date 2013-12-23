@@ -4,10 +4,12 @@ local gamemanager = {}
 function gamemanager:init()
 
    constants:init()
+   inventory:init()
    collisionmanager:init()
    dialoguemanager:init()
    displaymanager:init()
    mapmanager:init()
+   events:init()
 
    -- start the player
    playermanager:init(constants.startingLoc.xtile,constants.startingLoc.ytile)

@@ -106,15 +106,15 @@ function playermanager:keypressed(key)
 
       if collide == 'npc' and name then
          npcmanager:talk(constants.currmap, name)
+      end
 
-         -- this is an example of a handcoded event
-         -- I'm still thinking of how to do events
-         -- a separate 'eventmanager' that collects all the hardcoded stuff into one file
-         -- and checks on every update
-         if name == 'itemtest' then
-            npcmanager:removeNPC(constants.currmap, name)
-         end
-
+      -- these are calls to hardcoded events in events.lua
+      if name == 'whale' and not inventory:has('hook') then
+         events:getHook()
+      elseif name == 'octopus' and not inventory:has('rope') then
+         events:initMenu(name)
+      elseif name == 'mermaid06' and not inventory:has('cross') then
+         events:initMenu(name)
       end
 
    end

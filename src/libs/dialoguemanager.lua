@@ -5,24 +5,32 @@ function dialoguemanager:init()
 
    self.boxes = {}
    self.currbox = 1
+   self.menuitems = {}
+   self.curritem = 1
+   self.menu = ""
 
 end
 
 
-function dialoguemanager:addBox(tbl)
+function dialoguemanager:addBox(tbl, t)
+
+   t = t or self.boxes
 
    for i,phrase in ipairs(tbl) do
       dbug.show('adding ' .. phrase .. ' to dialogue')
-      table.insert(self.boxes, phrase)
+      table.insert(t, phrase)
    end
 
 end
 
 
-function dialoguemanager:clearAll()
+function dialoguemanager:clearAll(t)
 
-   constants.clearTable(self.boxes)
+   local t = t or self.boxes
+
+   constants.clearTable(t)
    self.currbox = 1
+   self.curritem = 1
 
 end
 
@@ -38,11 +46,41 @@ function dialoguemanager:startDialogue(tbl)
 end
 
 
-function dialoguemanager:endDialogue()
+function dialoguemanager:endDialogue(menu)
 
-   gamemanager:setState('normal')
-   dialoguemanager:clearAll()
 
+   if not self.menuitems[1] then
+      gamemanager:setState('normal')
+   end
+
+   if menu then
+      dialoguemanager:clearAll(self.menuitems)
+   else
+      dialoguemanager:clearAll()
+   end
+
+   if not self.menuitems[1] then
+      gamemanager:setState('normal')
+   end
+
+end
+
+
+function dialoguemanager:endMenu(menu)
+
+   events:menuAnswer(self.menu, self.menuitems[self.curritem + 1])
+   dialoguemanager:endDialogue(true)
+
+end
+
+
+function dialoguemanager:startMenu(menu, tbl)
+
+   if tbl then
+      self.menu = menu
+      dialoguemanager:addBox(tbl,self.menuitems)
+      gamemanager:setState('dialogue')
+   end
 end
 
 
@@ -59,10 +97,36 @@ function dialoguemanager:box(x,y,w,h)
 end
 
 
+function dialoguemanager:printDialogue(text)
+
+   love.graphics.printf(text,11,21*8+11,31*8-23,"left")
+
+end
+
+
 function dialoguemanager:render()
 
-   self:box(0,21*8,31*8,8*8)
-   love.graphics.printf(self.boxes[self.currbox],11,21*8+11,31*8-23,"left")
+   self:box(0,21*8,32*8,8*8)
+
+   if self.boxes[1] then
+      self:printDialogue(self.boxes[self.currbox])
+   elseif self.menuitems[1] then
+      local tempstr = ""
+      for i,v in pairs(self.menuitems) do
+         ---[[
+         if i == 1 then
+            tempstr = tempstr .. v .. '\n\n'
+         else
+            if self.curritem == i - 1 then
+               tempstr = tempstr .. '-' .. v .. '- '
+            else
+               tempstr = tempstr .. '  ' .. v .. '  '
+            end
+         end
+         --]]
+      end
+      self:printDialogue(tempstr)
+   end
 
 end
 
@@ -81,11 +145,29 @@ end
 
 function dialoguemanager:keypressed(key)
 
+   dbug.show('dialogue key pressed: ' .. key)
+
    if key == ' ' then
-      self.currbox = self.currbox + 1
-      if not self.boxes[self.currbox] then
-         dialoguemanager:endDialogue()
+      if self.boxes[1] then
+         self.currbox = self.currbox + 1
+         if not self.boxes[self.currbox] then
+            dialoguemanager:endDialogue()
+         end
+      elseif self.menuitems[1] then
+         self:endMenu()
       end
+   end
+
+   if (key == 'left') and self.menuitems[2] then
+      self.curritem = self.curritem - 1
+      dbug.show('current choice is ' .. self.curritem)
+      if self.curritem <= 1 then self.curritem = 1 end
+   end
+
+   if (key == 'right') and self.menuitems[2] then
+      self.curritem = self.curritem + 1
+      dbug.show('current choice is ' .. self.curritem)
+      if self.curritem >= #self.menuitems - 1 then self.curritem = #self.menuitems - 1 end
    end
 
 end

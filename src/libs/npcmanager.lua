@@ -51,6 +51,11 @@ function npcmanager.parse(f, t)
                for phrase in string.gmatch(word, '[^/*]+') do
                   table.insert(t[currroom][currname].dialogue.pre, phrase)
                end
+            elseif column == 10 then
+               t[currroom][currname].dialogue.post = {}
+               for phrase in string.gmatch(word, '[^/*]+') do
+                  table.insert(t[currroom][currname].dialogue.post, phrase)
+               end
             end
          end
       end
