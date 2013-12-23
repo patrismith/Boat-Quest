@@ -49,6 +49,7 @@ function playermanager:exit(dest)
 
    -- having this function be in playermanager
    -- seems a little unintuitive.
+   events:checkAnchor()
    displaymanager:resetSprites()
    collisionmanager:clearAll()
    mapmanager:loadMap(dest.map)
@@ -97,7 +98,7 @@ function playermanager:keypressed(key)
    -- this is the talking part of the ride
    -- we use spacebar to talk/check
    -- must be facing the object!
-   if love.keyboard.isDown(' ') then
+   if key == ' ' then
 
       local xtemp = self.location.x + constants.playerdir[self.location.dir].x
       local ytemp = self.location.y + constants.playerdir[self.location.dir].y
@@ -110,13 +111,24 @@ function playermanager:keypressed(key)
 
       -- these are calls to hardcoded events in events.lua
       if name == 'whale' and not inventory:has('hook') then
-         events:getHook()
+         events:getItem('hook')
       elseif name == 'octopus' and not inventory:has('rope') then
          events:initMenu(name)
       elseif name == 'mermaid06' and not inventory:has('cross') then
          events:initMenu(name)
       end
 
+   end
+
+
+   if dbugglobal then
+      if key == '1' then
+         events:getItem('hook')
+      elseif key == '2' then
+         events:menuAnswer('octopus', '8')
+      elseif key == '3' then
+         events:menuAnswer('mermaid06', 'Please')
+      end
    end
 
 end

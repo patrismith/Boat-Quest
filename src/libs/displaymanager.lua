@@ -70,6 +70,7 @@ end
 
 function displaymanager:removeSprite(name)
 
+   dbug.show('displaymanager is removing ' .. name)
    self.sprites[name] = nil
    self:updateSpriteindex()
 

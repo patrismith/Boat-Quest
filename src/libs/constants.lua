@@ -70,7 +70,7 @@ function constants:init()
 
    -- where the player starts
    self.startingLoc = {}
-   self.startingLoc.room = 'octoroom'
+   self.startingLoc.room = 'startroom'
    self.startingLoc.xtile = 20
    self.startingLoc.ytile = 15
 

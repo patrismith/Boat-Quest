@@ -7,7 +7,11 @@
 #
 #
 
-startroom:boat01:tugboat:16:20:false:false:false:I'm sorry Case, but I can't let you go to the boat party until you find your anchor.*You might drift away!*Maybe someone around the harbor knows where it is.*Why don't you go ask around?
+startroom:boat01:tugboat:13:14:true:false:false:I'm sorry Case, but I can't let you go to the boat party until you find your anchor.*You might drift away!*Maybe someone around the harbor knows where it is.*Why don't you go ask around?:Oh, you found your anchor? Go on through!
+startroom:buoy01:buoy:16:19:false:false:false
+startroom:buoy02:buoy:17:18:false:false:false
+startroom:buoy03:buoy:18:18:false:false:false
+startroom:buoy04:buoy:19:19:false:false:false
 signroom01:mermaid01:mermaid:13:11:false:false:false:Hello, Case! Are you looking for your anchor?*I think the whale might be able to help you.*Don't worry, he's a gentle giant!
 signroom01:sign01:leftsign:9:3:false:false:false:Caution! Whale Ahead!
 signroom01:sign02:rightsign:19:9:false:false:false:Smooth Sailing. This Way!

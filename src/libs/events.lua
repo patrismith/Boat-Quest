@@ -33,43 +33,58 @@ function events:menuAnswer(menu, answer)
    dbug.show('menu: ' .. menu .. '  answer: ' .. answer)
    if menu == 'octopus' then
       if answer == '8' then
-         self:switchDialogue('octopus')
-         self:getRope()
+         self:switchDialogue('octopus',nil,'octoroom')
+         self:getItem('rope')
       else
-         self:switchDialogue('octopus',{'That was not correct. Try again!'})
+         self:switchDialogue('octopus',{'That was not correct. Try again!'},'octoroom')
       end
    elseif menu == 'mermaid06' then
       if answer == 'Please' then
-         self:switchDialogue('mermaid06')
-         self:getCross()
+         self:switchDialogue('mermaid06',nil,'anchorroom')
+         self:getItem('cross')
       else
-         self:switchDialogue('mermaid06',{'You have to be polite when you talk to ME!'})
+         self:switchDialogue('mermaid06',{'You have to be polite when you talk to ME!'},'anchorroom')
       end
    end
 
 end
 
 
-function events:getHook()
+function events:getItem(item)
 
-   inventory:gain('hook')
+   inventory:gain(item)
 
-   -- since i don't have combat implemented or a decent dialogue switcher
-   self:switchDialogue('whale')
-
-end
-
-
-function events:getCross()
-
-   inventory:gain('cross')
+   if item == 'hook' then
+      -- since i don't have combat implemented or a decent dialogue switcher
+      self:switchDialogue('whale',nil,'whaleroom')
+   end
 
 end
 
 
-function events:getRope()
+function events:checkAnchor()
 
-   inventory:gain('rope')
+   if not self.stopChecking then
+      dbug.show('checking for anchor')
+      if inventory:has('hook') and inventory:has('cross') and inventory:has('rope') then
+         dbug.show('has all items')
+         self:openMaze()
+         self.stopChecking = true
+      else
+         dbug.show("doesn't have all items")
+      end
+   end
+
+end
+
+
+function events:openMaze()
+
+   for _,v in ipairs({'buoy01','buoy02','buoy03','buoy04'}) do
+      dbug.show('events is removing ' .. v)
+      npcmanager:removeNPC('startroom',v)
+   end
+   self:switchDialogue('boat01',nil,'startroom')
 
 end
 

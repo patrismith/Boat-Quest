@@ -121,6 +121,7 @@ end
 
 function npcmanager:removeNPC(map, name)
 
+   dbug.show('removing ' .. name .. ' from ' .. map)
    -- this permanently removes the NPC from the game
    self.npcs[map][name] = nil
    displaymanager:removeSprite(name)
@@ -133,7 +134,6 @@ function npcmanager:talk(map, name)
    dialoguemanager:startDialogue(self.npcs[map][name].dialogue.pre or nil)
 
 end
-
 
 function npcmanager:move(map, name)
 
