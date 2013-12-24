@@ -21,7 +21,7 @@ merroom01:mermaid03:mermaid:8:23:false:false:false:How do you talk to a fish?*Dr
 boatroom:boat02:cruiser:10:10:true:false:false:Port means left!*I can't seem to get this other boat to understand that though!
 boatroom:boat03:tugboat:15:15:true:false:false:Starboard means right!*This boat just will NOT listen though!
 signroom02:sign03:leftsign:10:10:false:false:false:This Way to the Wise Old Dolphin!
-signroom02:sign04:rightsign:10:10:false:false:false:Questioning Octopus
+signroom02:sign04:rightsign:14:17:false:false:false:Questioning Octopus
 octoroom:octopus:octopus:10:10:true:false:false:I will only give you your anchor rope back if you can tell me how many tentacles I have.:Very good!*For future reference, if you had said "ten", I would have said "WRONG!!"*That's because squid have 10 tentacles. Not me!
 merroom02:mermaid04:mermaid:10:10:false:false:false:Insert joke here!
 merroom02:mermaid05:mermaid:15:15:false:false:false:Another joke!
@@ -30,3 +30,8 @@ coralreef:boat04:tugboat:10:10:true:false:false:Inside those coral reefs are tho
 coralreef:boat05:cruiser:15:15:true:false:false:The biggest coral reef in the world is the Great Barrier Reef off the coast of Australia.*I'd sure like to sail over there and see it, but my mom says I might sink and I should wait till I'm older.
 merroom03:mermaid07:mermaid:10:10:false:false:false:I have a really good joke, but there's no one to hear it!*Do you want to hear it?*Well, I forgot...*Sorry, but you should have got here sooner!
 dolphinroom:dolphin:dolphin:10:10:true:false:false:Melissa Mermaid won't help you out, huh?*Well, sometimes you have to know the magic word to get people to help you.*Maybe you should say "please" next time you talk to her?:I love the sea!
+party:boat01:cruiser:10:10:true:false:false:Welcome to the party! Let's race!
+party:boat02:player:15:15:true:false:false:Hello, fellow sailboat!
+party:boat03:tugboat:9:3:true:false:false:I love to party!
+party:boat04:cruiser:3:23:true:false:false:I'm glad you came to the boat party.
+party:boat05:tugboat:27:5:true:false:false:I'm an anchor collector.*Yes, I have many anchors on board!
