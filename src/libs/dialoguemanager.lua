@@ -86,6 +86,9 @@ end
 
 function dialoguemanager:box(x,y,w,h)
 
+   love.graphics.draw(dialoguebg, x, y)
+
+   --[[
    love.graphics.setColor(0,0,0)
    love.graphics.rectangle("fill",x,y,w,h)
    love.graphics.setColor(255,255,255)
@@ -93,13 +96,16 @@ function dialoguemanager:box(x,y,w,h)
    love.graphics.setColor(0,0,0)
    love.graphics.rectangle("fill",x+4,y+4,w-8,h-8)
    love.graphics.setColor(255,255,255)
+   --]]
 
 end
 
 
 function dialoguemanager:printDialogue(text)
 
+   love.graphics.setColor(50,10,20)
    love.graphics.printf(text,11,21*8+11,31*8-23,"left")
+   love.graphics.setColor(255,255,255)
 
 end
 
@@ -107,6 +113,7 @@ end
 function dialoguemanager:render()
 
    self:box(0,21*8,32*8,8*8)
+
 
    if self.boxes[1] then
       self:printDialogue(self.boxes[self.currbox])
@@ -118,7 +125,7 @@ function dialoguemanager:render()
             tempstr = tempstr .. v .. '\n\n'
          else
             if self.curritem == i - 1 then
-               tempstr = tempstr .. '-' .. v .. '- '
+               tempstr = tempstr .. '>' .. v .. '  '
             else
                tempstr = tempstr .. '  ' .. v .. '  '
             end

@@ -15,9 +15,9 @@ end
 function inventory:init()
 
    self.inv = {}
-   self.inv.rope = self:generate(200)
-   self.inv.cross = self:generate(210)
-   self.inv.hook = self:generate(220)
+   self.inv.rope = self:generate(160)
+   self.inv.cross = self:generate(192)
+   self.inv.hook = self:generate(224)
 
 end
 
@@ -41,14 +41,7 @@ end
 function inventory:render()
 
    for k,v in pairs(self.inv) do
-      if v.has == false then
-         love.graphics.setColor(0,0,0)
-         love.graphics.rectangle("line",v.w,0,8,8)
-         love.graphics.setColor(255,255,255)
-      else
-         love.graphics.setColor(255,255,255)
-         love.graphics.rectangle("fill",v.w,0,8,8)
-      end
+      love.graphics.drawq(constants.invsheet.img, v.has and constants.inventory[k].a or constants.inventory[k].b, self.inv[k].w,10)
    end
 
 end

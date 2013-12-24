@@ -131,7 +131,9 @@ end
 
 function npcmanager:talk(map, name)
 
-   dialoguemanager:startDialogue(self.npcs[map][name].dialogue.pre or nil)
+   if self.npcs[map][name].dialogue then
+      dialoguemanager:startDialogue(self.npcs[map][name].dialogue.pre or nil)
+   end
 
 end
 

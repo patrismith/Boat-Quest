@@ -44,6 +44,36 @@ function constants:populate(x,w,h,animated,directioned,horiz,y)
 end
 
 
+function constants:loadSheet(imgfile)
+
+   dbug.show('loadSheet loading ' .. imgfile)
+   tbl = {}
+
+   tbl.img = love.graphics.newImage('assets/' .. imgfile .. '.png')
+   tbl.w = tbl.img:getWidth()
+   tbl.h = tbl.img:getHeight()
+
+   return tbl
+
+end
+
+
+function constants:newInvQuad(x,y)
+
+   return love.graphics.newQuad(x,y,32,32,self.invsheet.w,self.invsheet.h)
+
+end
+
+
+function constants:newInvItem(x)
+
+   t = {}
+   t.a = constants:newInvQuad(x,0)
+   t.b = constants:newInvQuad(x,32)
+   return t
+
+end
+
 function constants:init()
 
    self.tilesize = 8
@@ -74,10 +104,7 @@ function constants:init()
    self.startingLoc.xtile = 20
    self.startingLoc.ytile = 15
 
-   self.charsheet = {}
-   self.charsheet.img = love.graphics.newImage('assets/charsheet.png')
-   self.charsheet.w = self.charsheet.img:getWidth()
-   self.charsheet.h = self.charsheet.img:getHeight()
+   self.charsheet = self:loadSheet('charsheet')
    self.sprites = {}
    self.sprites.player = self:populate(0,16,16,true,true)
    self.sprites.cruiser = self:populate(32,24,16,true,true)
@@ -90,6 +117,13 @@ function constants:init()
    self.sprites.rightsign = self:populate(192,16,16,true,false,true)
    self.sprites.leftsign = self:populate(192,16,16,true,false,true,16)
    self.sprites.buoy = self:populate(192,8,16,true,false,true,32)
+
+   self.invsheet = self:loadSheet('inventory')
+   self.inventory = {}
+   self.inventory.hook = self:newInvItem(0)
+   self.inventory.cross = self:newInvItem(32)
+   self.inventory.rope = self:newInvItem(64)
+
 
    -- draw functions to pass to displaymanager
    -- simulates different 'gamestates'

@@ -35,3 +35,4 @@ party:boat02:player:15:15:true:false:false:Hello, fellow sailboat!
 party:boat03:tugboat:9:3:true:false:false:I love to party!
 party:boat04:cruiser:3:23:true:false:false:I'm glad you came to the boat party.
 party:boat05:tugboat:27:5:true:false:false:I'm an anchor collector.*Yes, I have many anchors on board!
+party:boat06:player:22:8:false:false:false:I didn't get invited to the boat party!*That's because I'm the host! Ha, ha!*Welcome to the boat party.

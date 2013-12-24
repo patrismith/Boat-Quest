@@ -22,9 +22,14 @@ function love.load()
    love.graphics.setColorMode('replace')
    love.graphics.setLine(1,'rough')
 
+
+
    local img = love.graphics.newImage('assets/littlefont.png')
    img:setFilter("nearest","nearest")
-   dialogueFont = love.graphics.newImageFont(img, " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!'\"-:?")
+   dialogueFont = love.graphics.newImageFont(img, " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!'\"-:?>")
+   dialoguebg = love.graphics.newImage('assets/dialogue.png')
+   dialoguebg:setFilter("nearest","nearest")
+   inventorybg = love.graphics.newImage('assets/inventory.png')
 
    love.graphics.setFont(dialogueFont)
 
