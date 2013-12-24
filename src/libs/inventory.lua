@@ -15,8 +15,8 @@ end
 function inventory:init()
 
    self.inv = {}
-   self.inv.rope = self:generate(160)
-   self.inv.cross = self:generate(192)
+   self.inv.rope = self:generate(224)
+   self.inv.cross = self:generate(224)
    self.inv.hook = self:generate(224)
 
 end
@@ -41,7 +41,7 @@ end
 function inventory:render()
 
    for k,v in pairs(self.inv) do
-      love.graphics.drawq(constants.invsheet.img, v.has and constants.inventory[k].a or constants.inventory[k].b, self.inv[k].w,10)
+      love.graphics.drawq(constants.invsheet.img, v.has and constants.inventory[k].a or constants.inventory[k].b, self.inv[k].w,0)
    end
 
 end

@@ -121,8 +121,8 @@ function constants:init()
    self.invsheet = self:loadSheet('inventory')
    self.inventory = {}
    self.inventory.hook = self:newInvItem(0)
-   self.inventory.cross = self:newInvItem(32)
-   self.inventory.rope = self:newInvItem(64)
+   self.inventory.cross = self:newInvItem(24)
+   self.inventory.rope = self:newInvItem(48)
 
 
    -- draw functions to pass to displaymanager
